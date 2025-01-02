@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
               <div className="w-10 rounded-full">
                 <Image
                   alt="User Avatar"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src="https://png.pngtree.com/png-clipart/20230927/original/pngtree-man-avatar-image-for-profile-png-image_13001882.png"
                   width={20}
                   height={50}
                 />
