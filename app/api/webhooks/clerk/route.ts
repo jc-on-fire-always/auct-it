@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 import { Webhook } from "svix";
 
 import { createUser} from "@/lib/actions/user.actions";
+import { connectToDatabase } from "@/lib/database/mongoose";
 
 export async function POST(req: Request) {
   // You can find this in the Clerk Dashboard -> Webhooks -> choose the webhook
@@ -59,18 +60,19 @@ export async function POST(req: Request) {
 
   // CREATE
   if (eventType === "user.created") {
-    const { id, email_addresses, image_url, username } = evt.data;
+    const { id, email_addresses,image_url,created_at,updated_at,first_name,last_name} = evt.data;
 
-    const user = {
-      clerkId: id,
-      email: email_addresses[0].email_address,
-      username: username!,
-      photo: image_url,
+    const user:any = {
+      id: id,
+      email: email_addresses[0]?.email_address,
+      createdAt: new Date(created_at),
+      updatedAt: new Date(updated_at),
+      firstName: first_name,
+      lastName: last_name,
+      profileImageUrl:image_url,
     };
-
     const newUser = await createUser(user);
-
-    // Set public metadata
+    
     if (newUser) {
       const client = await clerkClient();
       client.users.updateUserMetadata(id, {
