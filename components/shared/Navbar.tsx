@@ -1,4 +1,4 @@
-import { SignedIn, SignedOut, SignInButton } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -34,6 +34,8 @@ const Navbar: React.FC = () => {
                 <Image
                   alt="User Avatar"
                   src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  width={20}
+                  height={50}
                 />
               </div>
             </div>
@@ -41,6 +43,9 @@ const Navbar: React.FC = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
+              <li>
+                <UserButton />
+              </li>
               <li>
                 <Link href="/profile" className="justify-between">
                   Profile
