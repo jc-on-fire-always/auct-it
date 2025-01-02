@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
-import { clerkClient } from "@clerk/nextjs/server";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { clerkClient, User } from "@clerk/nextjs/server";
 import { WebhookEvent } from "@clerk/nextjs/server";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
@@ -60,6 +61,7 @@ export async function POST(req: Request) {
 
   // CREATE
   if (eventType === "user.created") {
+    await connectToDatabase();
     const { id, email_addresses,image_url,created_at,updated_at,first_name,last_name} = evt.data;
 
     const user:any = {
